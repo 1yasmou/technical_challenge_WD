@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { ScaleLoader } from "react-spinners";
+import defaultImage from "../assets/images/Honor_10.png";
 
 const PhoneDetails = () => {
   const { id } = useParams();
@@ -31,15 +32,17 @@ const PhoneDetails = () => {
       {phone ? (
         <div>
           <h2>Détails du Téléphone</h2>
-          {phone.imageFileName && (
+          {phone.imageFileName ? (
             <img
-              src={`../assets/images/${phone.imageFileName}`}
-              alt={phone.imageFileName}
+              src={defaultImage}
+              alt={phone.name}
               style={{ maxWidth: "200px" }}
             />
+          ) : (
+            <p>Image par défaut</p>
           )}
           <p>Nom : {phone.name}</p>
-          <p>Prix : {phone.price}</p>
+          <p>Prix : {phone.price} $</p>
         </div>
       ) : (
         <p>Le téléphone n'a pas pu être trouvé.</p>
